@@ -1,5 +1,6 @@
 import Server from "./services/server";
 import { connectToDB } from "./services/db";
+import Config from "../config";
 
 const puerto = 8080;
 

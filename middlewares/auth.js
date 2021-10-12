@@ -7,10 +7,16 @@ import {
   Strategy as FaceBookStrategy,
 } from "passport-facebook";
 import { Request, Response, NextFunction } from "express";
+import { yargs } from "yargs/yargs";
+import { hideBin } from "yargs/helpers";
+var argv = require("yargs/yargs")(process.argv.slice(2)).argv;
+
+const fb_app_id = argv.fb_app_id ? argv.fb_app_id : false;
+const fb_app_secret = argv.fb_app_secret ? argv.fb_app_secret : false;
 
 const strategyOptions = {
-  clientID: Config.FACEBOOK_APP_ID,
-  clientSecret: Config.FACEBOOK_APP_SECRET,
+  clientID: fb_app_id || Config.FACEBOOK_APP_ID,
+  clientSecret: fb_app_secret || Config.FACEBOOK_APP_SECRET,
   callbackURL: "http://localhost:8080/api/auth/facebook/callback",
   profileFields: ["id", "displayName", "photos", "emails"],
 };

@@ -5,13 +5,17 @@ import passport from "../../middlewares/auth";
 
 const router = express.Router();
 
-//router.post(
-//  "/login",
-//  passport.authenticate("login", {
-//    successRedirect: "/productos/vista",
-//    failureRedirect: "/productos/error-login",
-//  })
-//);
+router.get("/info", isLoggedIn, async (req, res) => {
+  const objInfo = {
+    argumentos_de_entrada: process.argv,
+    sistema_operativo: process.platform,
+    version_nodejs: process.version,
+    uso_memoria: process.memoryUsage(),
+  };
+  res.json({
+    data: objInfo,
+  });
+});
 
 router.get(
   "/auth/facebook",

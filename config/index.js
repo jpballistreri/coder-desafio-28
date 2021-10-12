@@ -12,7 +12,7 @@ const venvs = {
   SESSION_SECRET_KEY: process.env.SESSION_SECRET_KEY || "session secret key",
   FACEBOOK_APP_ID: process.env.FACEBOOK_APP_ID || "faceId",
   FACEBOOK_APP_SECRET: process.env.FACEBOOK_APP_SECRET || "faceSecret",
-  PORT: process.env.PORT || 8080,
+  EXPRESS_PORT: process.env.EXPRESS_PORT || 8080,
 };
 
 export default venvs;

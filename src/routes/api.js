@@ -2,7 +2,6 @@ import express from "express";
 import { DBProductos } from "../services/db";
 import { isLoggedIn } from "../../middlewares/auth";
 import passport from "../../middlewares/auth";
-import { randomNumbers } from "../../utils/randomNumbers";
 import { fork } from "child_process";
 import path from "path";
 
@@ -14,7 +13,7 @@ router.get("/randoms", isLoggedIn, async (req, res) => {
   const resultado = fork(scriptPath);
   const msj = {
     command: "start",
-    numero: req.query.numero,
+    numero: req.query.cant,
   };
   resultado.send(msj);
   resultado.on("message", (sum) => {

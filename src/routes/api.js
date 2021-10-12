@@ -2,8 +2,25 @@ import express from "express";
 import { DBProductos } from "../services/db";
 import { isLoggedIn } from "../../middlewares/auth";
 import passport from "../../middlewares/auth";
+import { randomNumbers } from "../../utils/randomNumbers";
+import { fork } from "child_process";
+import path from "path";
 
 const router = express.Router();
+
+router.get("/randoms", isLoggedIn, async (req, res) => {
+  const scriptPath = path.resolve(__dirname, "../../utils/randomNumbers.js");
+
+  const resultado = fork(scriptPath);
+  const msj = {
+    command: "start",
+    numero: req.query.numero,
+  };
+  resultado.send(msj);
+  resultado.on("message", (sum) => {
+    res.json({ resultado: sum });
+  });
+});
 
 router.get("/info", isLoggedIn, async (req, res) => {
   const objInfo = {
